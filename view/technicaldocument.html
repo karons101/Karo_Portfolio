@@ -1,0 +1,885 @@
+<!DOCTYPE html>
+<html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name ="viewport" content="width=device-width,initial-scale=1.0">
+<title>Technical Documention page |By Karo </title>
+<link rel="stylesheet" href="../public/stylesheet/technicaldocument.css">
+<script>var x = document.getElementsByClassName("current-date");
+var i;
+for (i = 0; i <x.length; i++) {
+  x[i].innerHTML = new Date().toISOString().substr(0, 10);
+}</script>
+</head>
+
+<div class="wrapper">
+  <nav id="navbar" class="navbar">
+    <header class="main-header">
+      <h3><a href="#" class="home-link">JavaScript object basics</a></h3>
+    </header>
+    <ul class="navigation"> 
+
+      
+<li class="nav-item"><a href="#Object_basics" class="nav-link">Object basics</a></li>
+
+      
+<li class="nav-item"><a href="#Object_oriented_JavaScript" class="nav-link">
+Object oriented Javascript</a></li>
+
+      
+<li class="nav-item"><a href="#Object_prototypes" class="nav-link">Object prototypes</a></li>
+
+      
+<li class="nav-item"><a href="#Inheritance_in_JavaScript"
+ class="nav-link">Inheritance in JavaScript
+</a></li>
+
+      
+<li class="nav-item"><a href="#Working_with_JSON" class="nav-link">Working with JSON</a></li>
+      
+      
+<li class="nav-item"><a href="#Object_building_practice" class="nav-link">Object building practice</a></li>
+      
+      
+<li class="nav-item"><a href="#Adding_features" class="nav-link">Adding features</a></li>
+      
+      
+<li class="nav-item"><a href="#Looping_code" class="nav-link">Looping code</a></li>
+      
+        <footer>
+ <p>The content for this documentation was taken from 
+<li class="nav-item"><a href="https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Objects/Basics" target="_blank"><class="nav-link">MDN</a></li></p>
+</footer>
+    </ul>
+  </nav>
+  
+  
+<main id="main-doc" class="main-doc">
+<section class="main-section" id="Object_basics">
+<header>
+<h2>Object basics</h2>
+</header>
+<p>An object is a collection of related data and/or functionality 
+(which usually consists of several variables and functions — 
+which are called properties and methods when they are inside objects.) 
+Let's work through an example to understand what they look like.</p>
+
+<p>To begin with, make a local copy of our oojs.html file.</p> 
+ <p> As with many things in JavaScript, creating an object often begins with defining 
+and initializing a variable.</p> 
+  <p>Try entering the following line below the JavaScript code 
+    that's already in your file, then saving and refreshing:<a href="#Object_basics">Object basics</a></p>
+      
+ <pre>
+ <code>
+var person = {}; 
+            </code>
+          </pre>
+      <p>Now open to your browser's JavaScript console, enter person into it, 
+and press Enter/Return. 
+you should get a result similar to one of the below lines:</p>
+      <pre>
+            <code>
+            [object Object]
+Object { }
+{ }
+ </code>
+          </pre>
+        
+     <p>Congratulations, you've just created your first object. Job done! But this is an empty object, so we can't really do much with it. Let's update the JavaScript object in our file to look like this:</p>
+         <pre>
+            <code>
+            var person = {
+  name: ['Bob', 'Smith'],
+  age: 32,
+  gender: 'male',
+  interests: ['music', 'skiing'],
+  bio: function() {
+alert(this.name[0] + ' ' + this.name[1] + ' is ' + this.age + ' years old. 
+He likes ' + this.interests[0] + ' and ' + this.interests[1] + '.');
+  },
+  greeting: function() {
+    alert('Hi! I\'m ' + this.name[0] + '.');
+  }
+};
+</code>
+</pre>
+        <p>After saving and refreshing, try entering some of the following into the JavaScript console on your browser devtools:</p>
+      <pre>
+            <code>
+            person.name
+person.name[0]
+person.age
+person.interests[1]
+person.bio()
+person.greeting()
+ </code>
+</pre>           
+            
+<p>To learn more about <strong>Object oriented</strong> and <strong> Javascript</strong>, see </p>
+      
+      <p>You have now got some data and functionality inside your object, and are now able to access them with some nice simple syntax!</p>
+      <p>So what is going on here? 
+Well, an object is made up of multiple members, each of which has a name 
+(e.g. name and age above), and a value (e.g. ['Bob', 'Smith'] and 32). 
+Each name/value pair must be separated by a comma, 
+and the name and value in each case are separated by a colon. 
+        The syntax always follows this pattern:</p>
+ 
+      <pre>
+ <code>
+var objectName = {
+  member1Name: member1Value,
+  member2Name: member2Value,
+  member3Name: member3Value
+};
+</code>
+</pre>
+      
+<p>The value of an object member can be pretty much anything — 
+in our person object we've got a string, a number, two arrays, and two functions. 
+The first four items are data items, and are referred to as the object's <strong>properties.</strong>
+The last two items are functions that allow the object to do something with that data, 
+and are referred to as the object's <strong>methods.</strong></p>
+
+<p>An object like this is referred to as an <strong>object literal </strong>— 
+we've literally written out the object contents as we've come to create it. 
+This is in contrast to objects instantiated from classes, which we'll look at later on.</p>
+
+<p>It is very common to create an object using an 
+object literal when you want to transfer a series of structured, 
+related data items in some manner, for example sending a request to the server to be put 
+into a database. Sending a single object is much more efficient than sending several items 
+individually, and it is easier to work with than an array, 
+when you want to identify individual items by name.</p>
+      
+      
+<h3>Dot notation</h3>
+<p>Above, you accessed the object's properties and methods using <strong>dot notation.</strong> 
+The object name (person) acts as the <strong>namespace</strong> — 
+it must be entered first to access anything <strong>encapsulated</strong> inside the object.
+ Next you write a dot, then the item you want to access — 
+this can be the name of a simple property, an item of an array property, 
+or a call to one of the object's methods, for example:</p>
+     
+  <pre>
+  <code>
+    1  person.age
+    2  person.interests[1]
+    3  person.bio()
+ </pre>
+ </code>
+</section>
+<section class="main-section" id="Object_oriented_JavaScript">
+      <header>
+        <h2>Object oriented Javascript</h2>
+      </header>
+      <h3>Object-oriented programming — the basics Edit Section</h3>
+<p>
+To start with, let's give you a simplistic, 
+high-level view of what Object-oriented programming (OOP) is. 
+We say simplistic, because OOP can quickly get very complicated, 
+and giving it a full treatment now would probably confuse more than help. 
+The basic idea of OOP is that we use objects to model real world things that we want to 
+represent inside our programs, and/or provide a simple way to access functionality 
+that would otherwise be hard or impossible to make use of.</p>
+
+<p>Objects can contain related data and code, which represent information about 
+the thing you are trying to model, and functionality or behavior that you want it to have. 
+Object data (and often, functions too) can be stored neatly 
+(the official word is <strong>encapsulated</strong>) 
+inside an object package (which can be given a specific name to refer to, 
+which is sometimes called a <strong>namespace</strong>), making it easy to structure and access; 
+objects are also commonly used as data stores that can be easily sent across the network.</p>
+      
+<h3>Defining an object template Section</h3><p>Let's consider a simple program that displays information about the students and 
+teachers at a school. Here we'll look at OOP theory in general, 
+not in the context of any specific programming language.</p>
+
+<p>To start this off, we could return to our Person object type from our first objects article, 
+which defines the generic data and functionality of a person. 
+There are lots of things you could know about a person 
+(their address, height, shoe size, DNA profile, passport number, significant personality traits ...)
+but in this case we are only interested in showing their name, age, gender, 
+and interests, and we also want to be able to write a short introduction about them based 
+on this data, and get them to say hello. This is known as <strong>abstraction</strong>— 
+creating a simple model of a more complex thing, which represents its most important 
+aspects in a way that is easy to work with for our program's purposes.</p>
+      
+ <pre>
+ <code>
+Class- Person
+Name- [First Name, Last Name.]
+Age
+Gender
+Interest
+Bio
+Greeting- Hi,
+</code>
+</pre>
+      
+      <h3>Creating actual objects Section</h3>
+<p>From our class, we can create object instances — objects that contain the data and functionality defined in the class. 
+From our Person class, we can now create some actual people:</p>
+      
+ <pre>
+ <code>
+Class- Person      Instantiation
+Name- [First Name, Last Name.]
+Age
+Gender
+Interest
+Bio
+Greeting- Hi,
+</code>
+</pre>
+  <br>    
+      
+ <pre>
+ <code>
+Class- Person 2
+Name- [Bob, Smith.]
+Age- 32
+Gender- Male
+Interest- (Music, Skiing)
+Bio- 32, Male, likes Music and Skiing
+Greeting- Hi,i am Bob,
+</code>
+</pre>
+<br> 
+ 
+      
+ <pre>
+ <code>
+Class- Person 3
+Name- [Diana, Cooper.]
+Age- 28
+Gender- Female
+Interest- (Kick boxing, Brewing)
+Bio- 28, Female, likes Kick boxing and Brewing
+Greeting- Hi, i'm Diana,
+</code>
+</pre>
+      
+<h3>Specialist classes Section</h3>
+<p>In this case we don't want generic people — we want teachers and students, which are both more specific types of people. 
+In OOP, we can create new classes based on other classes — these new <strong>child classes </strong>can be made to<strong>inherit</strong>the data and code features of their<strong> parent class</strong>, 
+so you can reuse functionality common to all the object types rather than having to duplicate it.  
+Where functionality differs between classes, 
+you can define specialized features directly on them as needed.</p>
+      
+      
+<pre>
+ <code>
+Class- Person      Instantiation
+Name- [First Name, Last Name.]
+Age
+Gender
+Interest
+Bio
+Greeting- Hi,
+</code>
+</pre>
+<br>    
+      
+ <pre>
+ <code>
+Class- Teacher
+Name- [Bob, Smith.]
+Age- 32
+Gender- Male
+Interest- (Music, Skiing)
+Bio- 32, Male, likes Music and Skiing
+Greeting- Hi,i am Bob,
+</code>
+</pre>
+<br> 
+ 
+ <pre>
+ <code>
+Class- Student
+Name- [Diana, Cooper.]
+Age- 28
+Gender- Female
+Interest- (Kick boxing, Brewing)
+Bio- 28, Female, likes Kick boxing and Brewing
+Greeting- Hi, i'm Diana,
+</code>
+</pre>
+      <h3>Constructors and object instances</h3>
+<p>JavaScript uses special functions called <strong>constructor functions</strong> to define objects and their features. 
+They are useful because you'll often come across situations in which you don't know 
+how many objects you will be creating; 
+constructors provide the means to create as many objects as you need in an effective way,
+ attaching data and functions to them as required.</p>
+
+<p>Let's explore creating classes via constructors and creating object instances from them 
+in JavaScript. First of all, we'd like you to make a new local copy of the oojs.html file 
+we saw in our first Objects article.</p>
+      
+ <h3>A simple example</h3>
+<p> 1. Let's start by looking at how you could define a person with a normal function. 
+Add this function within the script element:</p>
+      
+<pre>
+ <code>
+ function createNewPerson(name) {
+  var obj = {};
+  obj.name = name;
+  obj.greeting = function() {
+    alert('Hi! I\'m ' + obj.name + '.');
+  };
+  return obj;
+}
+</code>
+</pre>      
+      
+  <p> 2. You can now create a new person by calling this function — 
+try the following lines in your browser's JavaScript console: <a href="#Object_oriented_JavaScript">Object oriented JavaScript</a></p>
+      
+<pre>
+ <code>
+ var salva = createNewPerson('Salva');
+salva.name;
+salva.greeting();
+</code>
+</pre> 
+ </section>      
+<section class="main-section" id="Object_prototypes">
+      <header>
+        <h2>Object prototypes</h2>
+      </header>
+      <p>Prototypes are the mechanism by which JavaScript objects inherit features
+ from one another. In this article, we explain how prototype chains work and look at 
+how the prototype property can be used to add methods to existing constructors.</p>
+
+<h3>A prototype-based language?</h3>
+<p>JavaScript is often described as a<strong> prototype-based language </strong>— 
+to provide inheritance, objects can have a<strong> prototype object</strong>, 
+which acts as a template object that it inherits methods and properties from. 
+An object's prototype object may also have a prototype object, 
+which it inherits methods and properties from, and so on. 
+This is often referred to as a<strong> prototype chain</strong>, 
+and explains why different objects have properties and methods defined 
+on other objects available to them.</p>
+
+<p>Well, to be exact, the properties and methods are defined on the prototype property on the 
+Objects' constructor functions, not the object instances themselves.</p>
+
+<p>In JavaScript, a link is made between the object instance and its prototype 
+(its __proto__ property, which is derived from the prototype property on the constructor)
+ and the properties and methods are found by walking up the chain of prototypes.</p>
+
+<p><strong>Note:</strong> It's important to understand that there is a distinction between an 
+object's prototype (which is available via Object.getPrototypeOf(obj), 
+or via the deprecated __proto__ property) 
+and the prototype property on constructor functions. 
+The former is the property on each instance, and the latter is the property on the constructor. 
+That is, Object.getPrototypeOf(new Foobar()) refers to the same object as Foobar.prototype.</p>
+     
+     <h3>Understanding prototype objects</h3>
+<p>Here we'll go back to the example in which we finished writing our Person() 
+constructor — load the example in your browser.</p>
+
+<p>In this example, we have defined a constructor function, like so: <a href="#Object_prototypes">Object prototypes</a></p>
+
+
+<pre>
+ <code>
+function Person(first, last, age, gender, interests) {
+  
+  // property and method definitions
+  this.first = first;
+  this.last = last;
+//...
+}
+</code>
+</pre>
+  <br>    
+     
+<p>We have then created an object instance like this:</p>
+ <pre>
+ <code>
+var person1 = new Person('Bob', 'Smith', 32, 'male', ['music', 'skiing']);,
+</code>
+</pre>
+</section>   
+<section class="main-section" id="Inheritance_in_JavaScript">
+      <header>
+        <h2>Inheritance in JavaScript</h2>
+      </header>
+      <p>With most of the gory details of OOJS now explained, this article shows how to create "child" object classes 
+(constructors) that inherit features from their "parent" classes. 
+In addition, we present some advice on when and where you might use OOJS, 
+and look at how classes are dealt with in modern ECMAScript syntax.</p>
+
+<h3>Prototypal inheritance</h3>
+<p>So far we have seen some inheritance in action — 
+we have seen how prototype chains work, and how members are inherited going up a chain. 
+But mostly this has involved built-in browser functions. 
+How do we create an object in JavaScript that inherits from another object?</p>
+
+<p>Let's explore how to do this with a concrete example.</p>
+
+<h3>Getting startedEditSection</h3>
+<p>First of all, make yourself a local copy of our oojs-class-inheritance-start.html file 
+(see it running live also). Inside here you'll find the same Person() 
+constructor example that we've been using all the way through the module, 
+with a slight difference — we've defined only the properties inside the constructor: <a href="#Inheritance_in_JavaScript">Inheritance in JavaScript</a></p>
+
+<pre>
+ <code>
+function Person(first, last, age, gender, interests) {
+  this.name = {
+    first,
+    last
+  };
+  this.age = age;
+  this.gender = gender;
+  this.interests = interests;
+};
+</code>
+</pre>
+  <br>    
+     
+<p>The methods are all defined on the constructor's prototype. For example:</p>
+ <pre>
+ <code>
+Person.prototype.greeting = function() {
+  alert('Hi! I\'m ' + this.name.first + '.');
+};
+</code>
+</pre>
+<br>
+       
+<p><strong>Note:</strong> In the source code, you'll also see bio() and farewell() 
+methods defined. 
+Later you'll see how these can be inherited by other constructors.</p>
+
+<p>Say we wanted to create a Teacher class, 
+like the one we described in our initial object-oriented definition, 
+which inherits all the members from Person, but also includes:</p>
+       
+       <h3>Defining a Teacher() constructor function</h3>
+<p>The first thing we need to do is create a Teacher() constructor — 
+add the following below the existing code:</p>
+
+
+<pre>
+ <code>
+function Teacher(first, last, age, gender, interests, subject) {
+  Person.call(this, first, last, age, gender, interests);
+
+  this.subject = subject;
+}
+</code>
+</pre>
+  <br> 
+    
+<p>This looks similar to the Person constructor in many ways, 
+but there is something strange here that we've not seen before — 
+the call() function. This function basically allows you to call a function defined somewhere else, 
+but in the current context. The first parameter specifies the value of this that you want to use 
+when running the function, and the other parameters are those that should be passed to 
+the function when it is invoked.</p>
+
+<p>We want the Teacher() constructor to take the same parameters as the Person() 
+constructor it is inheriting from, so we specify them all as parameters in the call() invocation.</p>
+
+<p>The last line inside the constructor simply defines the new subject property that teachers are 
+going to have, which generic people don't have.</p>
+
+<p>As a note, we could have simply done this:</p>
+     <pre>
+ <code>
+function Teacher(first, last, age, gender, interests, subject) {
+  this.name = {
+    first,
+    last
+  };
+  this.age = age;
+  this.gender = gender;
+  this.interests = interests;
+  this.subject = subject;
+}
+</code>
+</pre>
+  <br>   
+    
+       
+       <p>But this is just redefining the properties anew, not inheriting them from Person(), 
+so it defeats the point of what we are trying to do. It also takes more lines of code.</p>
+
+<h3>Inheriting from a constructor with no parameters</h3>
+
+<p>Note that if the constructor you are inheriting from doesn't take its property values from 
+parameters, you don't need to specify them as additional arguments in call(). 
+So, for example,  if you had something really simple like this:</p>
+
+<pre>
+ <code>
+function Brick() {
+  this.width = 10;
+  this.height = 20;
+}
+</code>
+</pre>
+  <br>    
+     
+<p>You could inherit the width and height properties by doing this
+ (as well as the other steps described below, of course):</p>
+ <pre>
+ <code>
+function BlueGlassBrick() {
+  Brick.call(this);
+
+  this.opacity = 0.5;
+  this.color = 'blue';
+}
+</code>
+</pre>
+<br> 
+ <p>Note that we've only specified this inside call() — 
+no other parameters are required as we are not inheriting any properties from the 
+parent that are set via parameters.</p>
+      
+<section class="main-section" id="Working_with_JSON">
+      <header>
+        <h2>Working with JSON</h2>
+      </header>
+      <p>JavaScript Object Notation (JSON) is a standard text-based format for 
+representing structured data based on JavaScript object syntax. 
+It is commonly used for transmitting data in web applications 
+(e.g., sending some data from the server to the client, so it can be displayed on a web page, 
+or vice versa). You'll come across it quite often, so in this article we give you 
+all you need to work with JSON using JavaScript, including parsing JSON 
+so you can access data within it, and creating JSON.</p>
+
+<h3>No, really, what is JSON?</h3>
+
+<p>JSON is a text-based data format following JavaScript object syntax, 
+which was popularized by Douglas Crockford. 
+Even though it closely resembles JavaScript object literal syntax, 
+it can be used independently from JavaScript, 
+and many programming environments feature the ability to read (parse) and generate JSON.</p>
+
+<p>JSON exists as a string — useful when you want to transmit data across a network.
+ It needs to be converted to a native JavaScript object when you want to access the data. 
+This is not a big issue —  JavaScript provides a global JSON object that 
+has methods available for converting between the two.</p>
+
+<p><strong>Note: </strong>Converting a string to a native object is called parsing, 
+while converting a native object to a string so it can be transmitted across the network 
+is called stringification.</p>
+
+<p>A JSON object can be stored in its own file, which is basically just a text file 
+with an extension of .json, and a MIME type of application/json.</p>
+      <p>JavaScript Object Notation (JSON) is a standard text-based format for 
+representing structured data based on JavaScript object syntax. 
+It is commonly used for transmitting data in web applications 
+(e.g., sending some data from the server to the client, so it can be displayed on a web page, 
+or vice versa). You'll come across it quite often, so in this article we give you 
+all you need to work with JSON using JavaScript, including parsing JSON 
+so you can access data within it, and creating JSON.</p>
+
+<h3>JSON structure</h3>
+
+<p>As described above, a JSON is a string whose format very much resembles JavaScript object 
+literal format. You can include the same basic data types inside JSON as you can in a
+standard JavaScript object — strings, numbers, arrays, booleans, and other object literals. 
+This allows you to construct a data hierarchy, like so: <a href="#Working_with_JSON">Working with JSON</a></p>
+
+<pre>
+ <code>
+{
+  "squadName": "Super hero squad",
+  "homeTown": "Metro City",
+  "formed": 2016,
+  "secretBase": "Super tower",
+  "active": true,
+  "members": [
+    {
+      "name": "Molecule Man",
+      "age": 29,
+      "secretIdentity": "Dan Jukes",
+      "powers": [
+        "Radiation resistance",
+        "Turning tiny",
+        "Radiation blast"
+      ]
+    },
+    {
+      "name": "Madame Uppercut",
+      "age": 39,
+      "secretIdentity": "Jane Wilson",
+      "powers": [
+        "Million tonne punch",
+        "Damage resistance",
+        "Superhuman reflexes"
+      ]
+    },
+    {
+      "name": "Eternal Flame",
+      "age": 1000000,
+      "secretIdentity": "Unknown",
+      "powers": [
+        "Immortality",
+        "Heat Immunity",
+        "Inferno",
+        "Teleportation",
+        "Interdimensional travel"
+      ]
+    }
+  ]
+}
+</code>
+</pre>
+  <br>    
+        
+        
+<p>If we loaded this object into a JavaScript program, parsed in a variable called 
+superHeroes for example, we could then access the data inside it using the same 
+dot/bracket notation we looked at in the JavaScript object basics article. For example:</p>
+
+<pre>
+ <code>
+superHeroes.homeTown
+superHeroes['active']
+</code>
+</pre>
+  <br>
+        
+        <p>To access data further down the hierarchy, you simply have to chain 
+the required property names and array indexes together.  
+For example, to access the third superpower of the second hero listed in the members list, 
+you'd do this:</p>
+
+<pre>
+ <code>
+superHeroes['members'][1]['powers'][2]
+</code>
+</pre>
+  <br> 
+  <p>1. First we have the variable name — superHeroes.</p>
+<p>2. Inside that we want to access the members property, so we use ["members"].
+<p>3. members contains an array populated by objects. We want to access the second object inside the array, so we use [1].</p>
+<p>4. Inside this object, we want to access the powers property, so we use ["powers"].</p>
+<p>5. Inside the powers property is an array containing the selected hero's superpowers. 
+We want the third one, so we use [2].</p>  
+        
+        
+<h3>Other notes</h3>
+<p><ul>JSON is purely a data format — it contains only properties, no methods.</p></ul>
+<p><ul>JSON requires double quotes to be used around strings and property names. </p></ul>
+<p><ul>Single quotes are not valid.</p></ul>
+<p><ul>Even a single misplaced comma or colon can cause a JSON file to go wrong, 
+and not work. You should be careful to validate any data you are attempting to use 
+(although computer-generated JSON is less likely to include errors, 
+as long as the generator program is working correctly). 
+You can validate JSON using an application like JSONLint.</p></ul>
+
+<p><ul>JSON can actually take the form of any data type that is valid for inclusion inside JSON, 
+not just arrays or objects. So for example, a single string or number would be a valid JSON object.
+Unlike in JavaScript code in which object properties may be unquoted, in JSON, 
+only quoted strings may be used as properties.</ul></p>
+</section>
+        
+<section class="main-section" id="Object_building_practice">
+<header>
+<h2>Object building practice</h2>
+</header>
+      <h3>Getting started</h3>
+
+<p>To begin with, make local copies of our index.html, style.css, and main.js files. 
+These contain the following, respectively:</p>
+
+<p>1. A very simple HTML document featuring an element, a canvas element to draw our balls on, and elements to apply our CSS and JavaScript to our HTML.</p>
+<p>2. Some very simple styles, which mainly serve to style and position the, and get rid of any scrollbars or margin round the edge of the page (so that it looks nice and neat).</p>
+<p>3. Some JavaScript that serves to set up the canvas element and provide a general function that we're going to use.</p>
+
+<p>The first part of the script looks like so:</p>
+          
+<pre>
+<code>
+[
+ var canvas = document.querySelector('canvas');
+
+var ctx = canvas.getContext('2d');
+
+var width = canvas.width = window.innerWidth;
+var height = canvas.height = window.innerHeight;
+</code>
+</pre>
+<br>   
+          
+          
+<p>This script gets a reference to the canvas element, then calls the getContext() method on it to give us a context on which we can start to draw. The resulting variable (ctx) is the object that directly represents the drawing area of the canvas and allows us to draw 2D shapes on it.</p>
+
+<p>Next, we set variables called width and height, and the width and height of the canvas element (represented by the canvas.width and canvas.height properties) to equal the width and height of the browser viewport (the area that the webpage appears on — this can be got from the Window.innerWidth and Window.innerHeight properties).</p>
+
+<p>You'll see here that we are chaining multiple assignments together, to get the variables all set quicker — this is perfectly OK.</p>
+
+The last bit of the initial script looks as follows:</p>
+  
+  <pre>
+ <code>
+function random(min, max) {
+  var num = Math.floor(Math.random() * (max - min + 1)) + min;
+  return num;
+}
+</code>
+</pre>
+<br> 
+<p>This function takes two numbers as arguments, and returns a random number in the range between the two.</p>
+  
+<h3>Modeling a ball in our program</h3>
+  <p>Our program will feature lots of balls bouncing around the screen. Since these balls will all behave in the same kind of way, it makes sense to represent them with an object. Let's start by adding the following constructor to the bottom of our code.</p>
+  
+  <pre>
+ <code>
+function Ball(x, y, velX, velY, color, size) {
+  this.x = x;
+  this.y = y;
+  this.velX = velX;
+  this.velY = velY;
+  this.color = color;
+  this.size = size;
+}
+</code>
+</pre>
+  <br> 
+  
+  <p>Here we include some parameters that define the properties each ball needs to function in our program:</p>
+
+<p>1. x and y coordinates — the horizontal and vertical coordinates where the ball will start on the screen. This can range between 0 (top left hand corner) to the width and height of the browser viewport (bottom right hand corner).</p>
+<p>2. horizontal and vertical velocity (velX and velY) — each ball is given a horizontal and vertical velocity; in real terms these values will be regularly added to the x/y coordinate values when we start to animate the balls, to move them by this much on each frame.</p>
+<p>3. color — each ball gets a color.</p>
+<p>4.size — each ball gets a size — this will be its radius, in pixels.</p>
+
+<p>This sorts the properties out, but what about the methods? We want to actually get our balls to do something in our program.</p>
+  
+  <h3>Drawing the ball</h3>
+
+<p>First add the following draw() method to the Ball()'s prototype:</p>
+  
+  <pre>
+ <code>
+Ball.prototype.draw = function() {
+  ctx.beginPath();
+  ctx.fillStyle = this.color;
+  ctx.arc(this.x, this.y, this.size, 0, 2 * Math.PI);
+  ctx.fill();
+}
+</code>
+</pre>
+  <br>  
+  <p>Using this function, we can tell our ball to draw itself onto the screen, by calling a series of members of the 2D canvas context we defined earlier (ctx). The context is like the paper, and now we want to command our pen to draw something on it:</p>
+
+<p>1. First, we use beginPath() to state that we want to draw a shape on the paper.</p>
+<p>2. Next, we use fillStyle to define what color we want the shape to be — we set it to our ball's color property.</p>
+<p>3.Next, we use the arc() method to trace an arc shape on the paper. Its parameters are: <a href="#Object_building_practice">Object building practice</a></p>
+</section>
+          
+<section class="main-section" id="Adding_features">
+      <header>
+        <h2>Adding features</h2>
+      </header>
+   <li>
+      <p>In this assessment, you are expected to use the bouncing balls demo from the previous article as a starting point, and add some new and interesting features to it.</p>
+      <h3>Project brief</h3>
+     
+<p>Our bouncy ball demo is fun, but now we want to make it a little bit more interactive by adding a user-controlled evil circle, which will eat the balls if it catches them. We also want to test your object-building skills by creating a generic Shape() object that our balls and evil circle can inherit from. Finally, we want to add a score counter to track the number of balls left to capture.</p>
+      <p>The following sections describe what you need to do.</p>
+<h3>Creating our new objects</h3>
+
+<p>1. The Shape() constructor should define the x, y, velX, and velY properties in the same way as the Ball() constructor did originally, but not the color and size properties.</p>
+<p>2. It should also define a new property called exists, which is used to track whether the balls exist in the program (have not been eaten by the evil circle). This should be a boolean (true/false).</p>
+<p>3.The Ball() constructor should inherit the x, y, velX, velY, and exists properties from the Shape() constructor.</p>
+<p>4.It should also define a color and a size property, like the original Ball() constructor did.</p>
+<p>5.Remember to set the Ball() constructor's prototype and constructor appropriately.</p>
+<p>The ball draw(), update(), and collisionDetect() method definitions should be able to stay exactly the same as they were before.</p>
+<p>You also need to add a new parameter to the new Ball() ( ... ) constructor call — the exists parameter should be the 5th parameter, and should be given a value of true.</p>
+<p>At this point, try reloading the code — it should work just the same as it did before, with our redesigned objects.</p>
+
+
+<h3>Defining EvilCircle()</h3>
+<p>Now it's time to meet the bad guy — the EvilCircle()! Our game is only going to involve one evil circle, but we are still going to define it using a constructor that inherits from Shape() to give you some practice. You might want to add another circle to the app later on that can be controlled by another player, or have several computer-controlled evil circles. You're probably not going to take over the world with a single evil circle, but it will do for this assessment.</p>
+<p>The EvilCircle() constructor should inherit x, y, velX, velY, and exists from Shape(), but velX and velY should always equal 20.</p>
+<p>You should do this something like Shape.call(this, x, y, 20, 20, exists);</p>
+<p>It should also define its own properties, as follows:</p>
+
+<p><li>color — 'white'</p></li>
+<p><li>size — 10</p></li>
+<p>Again, remember to define your inherited properties as parameters in the constructor, and set the prototype and constructor properties correctly.</p></li>
+
+<h3>Defining EvilCircle()'s methods</h3>
+<p>EvilCircle() should have four methods, as described below.</p>
+<p>draw()</p>
+<p>This method has the same purpose as Ball()'s draw() method: It draws the object instance on the canvas. It will work in a very similar way, so you can start by copying the Ball.prototype.draw definition. You should then make the following changes:</p>
+<p><li>We want the evil circle to not be filled in, but rather just have an outer line (stroke). You can achieve this by updating fillStyle and fill() to strokeStyle and stroke().</p></li>
+<p><li>We also want to make the stroke a bit thicker, so you can see the evil circle a bit more easily. This can be achieved by setting a value for lineWidth somewhere after the beginPath() call (3 will do).</p></li>
+
+<h3>checkBounds()</h3>
+<p>This method will do the same thing as the first part of Ball()'s update() function — look to see whether the evil circle is going to go off the edge of the screen, and stop it from doing so. Again, you can mostly just copy the Ball.prototype.update definition, but there are a few changes you should make:</p>
+
+<p><li>Get rid of the last two lines — we don't want to automatically update the evil circle's position on every frame, because we will be moving it in some other way, as you'll see below.</p></li>
+<p><li>Inside the if() statements, if the tests return true we don't want to update velX/velY; we want to instead change the value of x/y so the evil circle is bounced back onto the screen slightly. Adding or subtracting (as appropriate) the evil circle's size property would make sense.</p></li>
+
+<h3>setControls()</h3>
+
+<p>This method will add an onkeydown event listener to the window object so that when certain keyboard keys are pressed, we can move the evil circle around. The following code block should be put inside the method definition: <a href="#Adding_features">Adding features</a></p>
+
+<pre>
+ <code>
+var _this = this;
+window.onkeydown = function(e) {
+    if (e.keyCode === 65) {
+      _this.x -= _this.velX;
+    } else if (e.keyCode === 68) {
+      _this.x += _this.velX;
+    } else if (e.keyCode === 87) {
+      _this.y -= _this.velY;
+    } else if (e.keyCode === 83) {
+      _this.y += _this.velY;
+    }
+  }
+</code>
+</pre>
+</section>
+<section class="main-section" id="Looping_code">
+      <header>
+       <h2>Looping code</h2>
+      </header>
+      <p>Programming languages are very useful for rapidly completing repetitive tasks, from multiple basic calculations to just about any other situation where you've got a lot of similar items of work to complete. Here we'll look at the loop structures available in JavaScript that handle such needs.</p>
+
+<h3>Keep me in the loop</h3>
+
+<p>Loops, loops, loops. As well as being associated with popular breakfast cereals, roller coasters and musical production, they are also a critical concept in programming. Programming loops are all to do with doing the same thing over and over again — which is termed<strong> iteration</strong> in programming speak.
+
+<p>Let's consider the case of a farmer that is making sure he has enough food to feed his family for the week. He might use the following loop to achieve this:</p>
+      
+      <p>A loop usually has one or more of the following features:</p>
+
+<p><li> A <srong>counter</strong>, which is initialized with a certain value — this is the starting point of the loop ("Start: I have no food", above).</li></p>
+<p><li> An <strong>exit condition</strong>, which is the criteria under which the loop stops — usually the counter reaching a certain value. This is illustrated by "Have I got enough food?", above. Let's say he needs 10 portions of food to feed his family.</li></p>
+<p><li> An <strong>iterator</strong>, which generally increments the counter by a small amount on each successive loop, until it reaches the exit condition. We haven't explicitly illustrated this above, but we could think about the farmer being able to collect say 2 portions of food per hour. After each hour, the amount of food he has collected is incremented by two, and he checks whether he has enough food. If he has reached 10 portions (the exit condition), he can stop collecting and go home.</li></p>
+<p>In pseudocode, this would look something like the following: <a href="#Looping_code">Looping code</a></p>
+      
+      <pre>
+ <code>
+loop(food = 0; foodNeeded = 10) {
+  if (food >= foodNeeded) {
+    exit loop;
+    // We have enough food; let's go home
+  } else {
+    food += 2; // Spend an hour collecting 2 more food
+    // loop will then run again
+  }
+}
+<p>So the amount of food needed is set at 10, and the amount the farmer currently has is set at 0. In each iteration of the loop we check whether the amount of food the farmer has is larger or equal to the amount he needs. If so, we can exit the loop. If not, the farmer spends an hour collecting two portions of food, and the loop runs again.</p>
+</code>
+</pre>
+    </section>
+  </main>
+</div>
